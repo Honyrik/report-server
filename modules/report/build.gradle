@@ -1,0 +1,65 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'eclipse'
+    id 'org.springframework.boot'
+    id 'io.spring.dependency-management'
+}
+
+group = 'ru.tehnobear'
+version = '0.0.1'
+
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation "org.springframework.data:spring-data-jpa"
+
+    // openapi
+    // https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webflux-ui
+    implementation "org.springdoc:springdoc-openapi-starter-webflux-ui:${springdocVersion}"
+    // https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports
+    implementation "net.sf.jasperreports:jasperreports:${jasperreportsVersion}"
+    implementation "net.sf.jasperreports:jasperreports-fonts:${jasperreportsVersion}"
+    implementation "com.lowagie:itext:${itextVersion}"
+
+    // db
+    implementation "com.zaxxer:HikariCP:${HikariCPVersion}"
+    implementation "org.postgresql:postgresql:${postgresqlVersion}"
+    // https://mvnrepository.com/artifact/com.oracle.database.jdbc/ojdbc11
+    implementation "com.oracle.database.jdbc:ojdbc11:${ojdbc11Verion}"
+    // https://mvnrepository.com/artifact/net.ttddyy/datasource-proxy
+    implementation "net.ttddyy:datasource-proxy:${ttddyyVersion}"
+    // https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-core
+    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}:jakarta"
+    annotationProcessor "javax.annotation:javax.annotation-api:${javaxVersion}"
+    annotationProcessor "jakarta.persistence:jakarta.persistence-api:${jakartaPersistenceApiVersion}"
+    implementation "jakarta.persistence:jakarta.persistence-api:${jakartaPersistenceApiVersion}"
+
+
+    // modules
+    implementation project(":modules:dao")
+    implementation project(":modules:share")
+
+    // lombok
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
+    testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    testImplementation platform("org.junit:junit-bom:${junitBomVersion}")
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}

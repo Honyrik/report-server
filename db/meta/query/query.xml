@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+        <include file="Provider_er_api.sql" relativeToChangelogFile="true" />
+        <include file="ERJDownloadAsset.sql" relativeToChangelogFile="true" />
+        <include file="ERJDownloadDbPatch.sql" relativeToChangelogFile="true" />
+        <include file="ERJGenerateDbPatch.sql" relativeToChangelogFile="true" />
+        <include file="ERJGetAsset.sql" relativeToChangelogFile="true" />
+        <include file="ERJGetAssetExtra.sql" relativeToChangelogFile="true" />
+        <include file="ERJGetAuthorization.sql" relativeToChangelogFile="true" />
+        <include file="ERJGetAuthorizationExtra.sql" relativeToChangelogFile="true" />
+        <include file="ERJGetDAsset.sql" relativeToChangelogFile="true" />
+        <include file="ERJGetDFormat.sql" relativeToChangelogFile="true" />
+        <include file="ERJGetDPluginAuthorization.sql" relativeToChangelogFile="true" />
+        <include file="ERJGetDPluginFormat.sql" relativeToChangelogFile="true" />
+        <include file="ERJGetDPluginJRExporter.sql" relativeToChangelogFile="true" />
+        <include file="ERJGetDPluginSource.sql" relativeToChangelogFile="true" />
+        <include file="ERJGetDQueue.sql" relativeToChangelogFile="true" />
+        <include file="ERJGetDSource.sql" relativeToChangelogFile="true" />
+        <include file="ERJGetDStatus.sql" relativeToChangelogFile="true" />
+        <include file="ERJGetDbPatch.sql" relativeToChangelogFile="true" />
+        <include file="ERJGetGlobalSetting.sql" relativeToChangelogFile="true" />
+        <include file="ERJGetQueue.sql" relativeToChangelogFile="true" />
+        <include file="ERJGetQueueExtra.sql" relativeToChangelogFile="true" />
+        <include file="ERJGetQueueFile.sql" relativeToChangelogFile="true" />
+        <include file="ERJGetQueueLog.sql" relativeToChangelogFile="true" />
+        <include file="ERJGetReport.sql" relativeToChangelogFile="true" />
+        <include file="ERJGetReportAsset.sql" relativeToChangelogFile="true" />
+        <include file="ERJGetReportAssetExtra.sql" relativeToChangelogFile="true" />
+        <include file="ERJGetReportExtra.sql" relativeToChangelogFile="true" />
+        <include file="ERJGetReportFormat.sql" relativeToChangelogFile="true" />
+        <include file="ERJGetReportFormatExtra.sql" relativeToChangelogFile="true" />
+        <include file="ERJGetScheduler.sql" relativeToChangelogFile="true" />
+        <include file="ERJGetSchedulerExtra.sql" relativeToChangelogFile="true" />
+        <include file="ERJGetSource.sql" relativeToChangelogFile="true" />
+        <include file="ERJGetSourceExtra.sql" relativeToChangelogFile="true" />
+        <include file="ERJUploadAsset.sql" relativeToChangelogFile="true" />
+
+</databaseChangeLog>

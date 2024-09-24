@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+./gradlew update -PrunList=schema,meta 1>> main.log 2>&1

@@ -1,0 +1,9 @@
+rootProject.name = 'essence-report'
+
+include(
+    'modules:dao',
+    'modules:receiver',
+    'modules:report',
+    'modules:service',
+    'modules:share'
+)

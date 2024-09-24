@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+app:
+  security:
+    type: essence
+    essence:
+      url: http://192.168.10.199:9020/api
+      cookieKey: essence.sid
+      sessionKey: session
+      mapRole:
+        - action: 20001
+          role: ROLE_ADMIN
+  receiver:
+    enabled: true
+    patchPath: TMP_LOCAL
+  report:
+    enabled: true
+    secret: f3e4adaa-a990-4ba4-adfa-d212800d80fb
+  service:
+    enabled: true
+  db:
+    driverClassName: org.postgresql.Driver
+    jdbcUrl: jdbc:postgresql://192.168.10.199:9021/essence_report_java
+    schema: s_ut
+    username: s_uc
+    password: s_uc

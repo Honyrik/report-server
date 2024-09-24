@@ -1,0 +1,70 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'eclipse'
+    id 'org.springframework.boot'
+    id 'io.spring.dependency-management'
+}
+
+group = 'ru.tehnobear'
+version = '0.0.1'
+
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation "org.springframework.data:spring-data-jpa"
+
+    // openapi
+    // https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webflux-ui
+    implementation "org.springdoc:springdoc-openapi-starter-webflux-ui:${springdocVersion}"
+
+    // util
+    annotationProcessor "javax.annotation:javax.annotation-api:${javaxVersion}"
+    annotationProcessor "jakarta.persistence:jakarta.persistence-api:${jakartaPersistenceApiVersion}"
+    implementation "jakarta.persistence:jakarta.persistence-api:${jakartaPersistenceApiVersion}"
+    implementation "com.cronutils:cron-utils:${cronutilsVersion}"
+    implementation "org.reflections:reflections:${reflectionsVersion}"
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-compress
+    implementation "org.apache.commons:commons-compress:${commonsCompressVersion}"
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+    implementation "org.apache.commons:commons-lang3:${commonsLang3Version}"
+
+
+    // QueryDSL
+    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}:jakarta"
+    implementation "org.postgresql:postgresql:${postgresqlVersion}"
+
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+    implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations
+    annotationProcessor "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}"
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core
+    implementation "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}"
+
+    // modules
+    implementation project(":modules:dao")
+    implementation project(":modules:share")
+
+    // lombok
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
+    testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    testImplementation platform("org.junit:junit-bom:${junitBomVersion}")
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}

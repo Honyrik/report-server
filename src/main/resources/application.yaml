@@ -1,0 +1,73 @@
+server:
+  port: 8080
+  http2:
+    enabled: true
+
+spring:
+  jackson:
+    mapper:
+      accept-case-insensitive-enums: true
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: essence-report
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    docExpansion: none
+  group-configs:
+    - group: dictionary_admin
+      display-name: Dictionary Admin
+      paths-to-match: /admin/dictionary/**
+    - group: admin
+      display-name: Admin
+      paths-to-match: /admin/**
+      paths-to-exclude: /admin/dictionary/**
+    - group: private
+      display-name: Private
+      paths-to-match: /report/**
+    - group: public
+      display-name: Public
+      paths-to-match: /public/**
+
+
+app:
+  security:
+    type: essence
+    exclude: |
+      /report/**,
+      /public/**,
+      /actuator/**,
+      /webjars/**,
+      /v3/**
+    essence:
+      url: http://localhost:9020/api
+      cookieKey: essence.sid
+      sessionKey: session
+      mapRole:
+        - action: 20001
+          role: ROLE_ADMIN
+  receiver:
+    enabled: true
+    patchPath: TMP_LOCAL
+    pluginPackageScan: |
+      ru.tehnobear.essence
+  report:
+    enabled: true
+    secret: f3e4adaa-a990-4ba4-adfa-d212800d80fb
+  service:
+    enabled: true
+    reportSchedulerPool: 10
+    runReportCron: "*/5 * * * * *"
+    clearReportCron: "0 0 3 * * ?"
+    reRunReportCron: "0 */5 * * * *"
+    registrationNewSchedulerCron: "*/30 * * * * *"
+  db:
+    driverClassName: org.postgresql.Driver
+    jdbcUrl: jdbc:postgresql://localhost:9021/essence_report_java
+    schema: s_ut
+    username: s_uc
+    password: s_uc
