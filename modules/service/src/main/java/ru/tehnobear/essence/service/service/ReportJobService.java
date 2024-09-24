@@ -30,13 +30,14 @@ import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ScheduledFuture;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
 public class ReportJobService {
     private final ConcurrentHashMap<UUID, Boolean> runMap = new ConcurrentHashMap<>();
-    private final ConcurrentHashMap<UUID, Boolean> schedulerMap = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<UUID, ScheduledFuture<?>> schedulerMap = new ConcurrentHashMap<>();
     private final JPAQueryFactory queryFactory;
     private final ReportRunnerManager reportRunnerManager;
     private final TransactionTemplate transactionTemplate;
@@ -125,7 +126,7 @@ public class ReportJobService {
                     log.debug("Registration scheduler {}", sc.getCkId());
                     var cron = reportCronParser.parse(sc.getCvUnixCron());
                     var nowReg = ZonedDateTime.now();
-                    reportTaskScheduler.schedule(() -> {
+                    var reg = reportTaskScheduler.schedule(() -> {
                         log.debug("Run scheduler {}", sc.getCkId());
                         LockingTaskExecutor executor = new DefaultLockingTaskExecutor(lockProvider);
                         Instant createdAt = Instant.now();
@@ -175,9 +176,25 @@ public class ReportJobService {
                         status.flush();
                         return null;
                     });
-                    schedulerMap.put(sc.getCkId(), true);
+                    schedulerMap.put(sc.getCkId(), reg);
                 } catch (Exception e){
                     log.error("Error registration scheduler {}", sc.getCkId(), e);
+                }
+            });
+        queryFactory.selectFrom(QTScheduler.tScheduler)
+            .where(
+                QTScheduler.tScheduler.ckId.in(schedulerMap.keySet())
+                    .and(QTScheduler.tScheduler.clEnable.eq(false).or(QTScheduler.tScheduler.clDeleted.eq(true)))
+            )
+            .fetch()
+            .forEach(sc -> {
+                try {
+                    var reg = schedulerMap.remove(sc.getCkId());
+                    if (reg != null) {
+                        reg.cancel(true);
+                    }
+                } catch (Exception e){
+                    log.error("Error remove registration scheduler {}", sc.getCkId(), e);
                 }
             });
     }
