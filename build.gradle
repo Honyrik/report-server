@@ -36,13 +36,23 @@ plugins {
 	id 'idea'
 	id 'eclipse'
 	id 'application'
+	id 'jacoco'
+	id 'jacoco-report-aggregation'
 	id 'org.springframework.boot' version "${springVersion}"
 	id 'io.spring.dependency-management' version "${springDependencyVersion}"
 }
 
 allprojects {
+	apply plugin: 'jacoco'
 	repositories {
 		mavenCentral()
+	}
+	jacocoTestReport {
+		reports {
+			xml.required = false
+			csv.required = false
+			html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+		}
 	}
 }
 
@@ -96,3 +106,16 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+jacocoTestReport {
+	reports {
+		xml.required = false
+		csv.required = false
+		html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+	}
+}
+
+tasks.named('check') {
+	dependsOn tasks.named('testCodeCoverageReport', JacocoReport)
+}
+
