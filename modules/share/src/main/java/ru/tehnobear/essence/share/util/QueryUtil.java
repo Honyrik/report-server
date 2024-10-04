@@ -257,6 +257,9 @@ public class QueryUtil {
                     case LIKE -> {
                         return Expressions.stringOperation(Ops.STRING_CAST, exp).likeIgnoreCase(String.format("%%%s%%", filter.getValue()));
                     }
+                    case NOTLIKE -> {
+                        return Expressions.stringOperation(Ops.STRING_CAST, exp).toUpperCase().notLike(String.format("%%%s%%", filter.getValue()).toUpperCase());
+                    }
                     case IN -> {
                         return exp.in((Collection) val);
                     }

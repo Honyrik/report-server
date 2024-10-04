@@ -13,13 +13,14 @@ public enum EFilter {
     GE(">="),
     LT("<"),
     LE("<="),
-    EQ("="),
-    LIKE("like"),
-    IN("in"),
+    EQ("=", "=="),
+    LIKE("like","~"),
+    NOTLIKE("not like","nl","!~"),
+    IN("in", "contains"),
     NOTIN("not in"),
     NE("<>", "!=", "not"),
     NOTNULL("not null", "is not null"),
-    NULL("null", "is null");
+    NULL( "is null");
 
     private List<String> val;
 
