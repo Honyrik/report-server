@@ -8,7 +8,6 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
-import ru.tehnobear.essence.dao.dto.Audit;
 
 import java.io.Serializable;
 import java.util.HashMap;

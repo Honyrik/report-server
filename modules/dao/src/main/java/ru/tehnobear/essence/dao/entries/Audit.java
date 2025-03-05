@@ -1,4 +1,4 @@
-package ru.tehnobear.essence.dao.dto;
+package ru.tehnobear.essence.dao.entries;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.persistence.*;
@@ -22,8 +22,8 @@ import java.util.UUID;
 @EqualsAndHashCode
 @RequiredArgsConstructor
 @SuperBuilder
+@Embeddable
 @MappedSuperclass
-@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 @SQLRestriction("not clDeleted")
 public abstract class Audit {
     @Column(name="\"ck_user\"", nullable = false)

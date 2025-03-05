@@ -10,7 +10,6 @@ import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.SQLJoinTableRestriction;
 import org.hibernate.type.NumericBooleanConverter;
 import org.hibernate.type.SqlTypes;
-import ru.tehnobear.essence.dao.dto.Audit;
 
 import java.io.Serializable;
 import java.time.Instant;

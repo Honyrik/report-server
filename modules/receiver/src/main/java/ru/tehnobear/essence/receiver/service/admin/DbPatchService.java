@@ -15,7 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.support.TransactionTemplate;
 import reactor.core.publisher.Mono;
-import ru.tehnobear.essence.dao.dto.Audit;
+import ru.tehnobear.essence.dao.entries.Audit;
 import ru.tehnobear.essence.dao.entries.*;
 import ru.tehnobear.essence.dao.util.Util;
 import ru.tehnobear.essence.receiver.dto.admin.CreatePatchFetch;
